@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Search</title>
+    <style>
+        :root {
+            --bg-color: #fff6e2;
+            --fg-color: #3c3836;
+            --bg-soft: #f6ecbe;
+            --fg-dim: #665c54;
+            --green: #79740e;
+            --green-bright: #8f8c13;
+            --border: #d5c4a1;
+            --accent: #a89984;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #282828;
+            --fg-color: #ebdbb2;
+            --bg-soft: #32302f;
+            --fg-dim: #a89984;
+            --green: #98971a;
+            --green-bright: #b8bb26;
+            --border: #504945;
+            --accent: #665c54;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg-color: #282828;
+                --fg-color: #ebdbb2;
+                --bg-soft: #32302f;
+                --fg-dim: #a89984;
+                --green: #98971a;
+                --green-bright: #b8bb26;
+                --border: #504945;
+                --accent: #665c54;
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--fg-color);
+            background-color: var(--bg-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        h1 {
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 10px;
+            color: var(--fg-color);
+        }
+        
+        h2 {
+            color: var(--green);
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: var(--green-bright);
+        }
+        
+        a {
+            color: var(--green-bright);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        code {
+            background: var(--bg-soft);
+            color: var(--green-bright);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 85%;
+        }
+        
+        .milestone {
+            margin: 10px 0;
+            padding: 8px 0;
+        }
+        
+        .milestone strong {
+            color: var(--green-bright);
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 30px 0;
+        }
+        
+        small {
+            color: var(--fg-dim);
+        }
+        
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            color: var(--fg-color);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--green);
+            color: var(--bg-color);
+        }
+    </style>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            let newTheme;
+            
+            if (!currentTheme) {
+                // If no theme is set, check system preference and toggle opposite
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                newTheme = systemPrefersDark ? 'light' : 'dark';
+            } else {
+                newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            }
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        });
+    </script>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <h1>Open Search</h1>
+    <p><strong>Democratize the index</strong></p>
+    <p><small><em>A personal, non-commercial research project exploring independent search infrastructure in Sweden</em></small></p>
+    
+    <h2>Introduction</h2>
+    <p>Europe has only one truly independent search engine with its own index: <a href="https://www.mojeek.com">Mojeek</a>, based in the UK. The <a href="https://www.eu-searchperspective.com">European Search Perspective (EUSP)</a> (France & Germany) will provide a second option once released.</p>
+    
+    <p>This limited diversity creates significant risks. When a handful of companies control how billions of people access information, we may face issues of censorship, algorithmic bias, and surveillance capitalism. Search engines shape public discourse and knowledge discovery. This power shouldn't be concentrated in so few actors.</p>
+    
+        <p>This project aims to investigate the challenges faced when building a search engine <strong>hosted entirely in Sweden</strong> using local and/or Swedish cloud providers. While this presents challenges, as Swedish providers currently lag behind international counterparts in both usability and affordability, we believe exploring this path will drive learning and improvement for all stakeholders, ultimately contributing to a more diverse and resilient global information ecosystem.</p>
+    
+    <h2>Milestones</h2>
+    <div class="milestone">
+        <strong>1.</strong> Crawl and index all HTML pages on Swedish domains (<code>.se</code>)
+    </div>
+    <div class="milestone">
+        <strong>2.</strong> Build the ranking system and search engine interface
+    </div>
+    <div class="milestone">
+        <strong>3.</strong> Expand indexing to additional top-level domains
+    </div>
+    
+    <hr>
+    <p><small>Building a more diverse and resilient global information ecosystem</small></p>
+    <p><small>Contact: <a href="mailto:hi@opensearch.se">hi@opensearch.se</a></small></p>
+    <p><small><strong>Disclaimer:</strong> This is an independent personal project, not affiliated with Amazon OpenSearch or any commercial search platform.</small></p>
+</body>
+</html>
